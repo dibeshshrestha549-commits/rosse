@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Poppins', sans-serif;
+    background: linear-gradient(135deg,#ff6a88,#ff99ac,#ff4e50);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+    overflow:hidden;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.card{
+    width:90%;
+    max-width:420px;
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(18px);
+    border-radius:25px;
+    padding:35px 25px;
+    text-align:center;
+    color:white;
+    box-shadow:0 0 40px rgba(255,0,80,0.5);
+    animation:fadeUp 1s ease;
+}
+
+h1{
+    font-family:'Great Vibes', cursive;
+    font-size:38px;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    font-size:15px;
+    margin-bottom:20px;
+}
+
+input{
+    width:85%;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    text-align:center;
+    font-size:15px;
+    outline:none;
+}
+
+button{
+    margin-top:20px;
+    padding:10px 30px;
+    border:none;
+    border-radius:30px;
+    font-size:15px;
+    cursor:pointer;
+    background:linear-gradient(45deg,#ff1e56,#ff512f);
+    color:white;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.07);
+}
+
+.hidden{
+    display:none;
+}
+
+.nameText{
+    font-size:20px;
+    margin-bottom:10px;
+    text-shadow:0 0 10px white;
+}
+
+.rose{
+    width:240px;
+    margin:20px auto;
+    border-radius:20px;
+    box-shadow:0 0 30px rgba(255,255,255,0.7);
+}
+
+.message{
+    font-size:16px;
+    line-height:1.6;
+    margin-top:15px;
+    opacity:0;
+    animation:fadeIn 3s forwards;
+    animation-delay:1.2s;
+}
+
+/* animations */
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeIn{
+    to{opacity:1;}
+}
+
+/* floating hearts */
+.heart{
+    position:absolute;
+    font-size:16px;
+    color:white;
+    animation:rise 6s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes rise{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="page1">
+    <h1>Before This Rose 🌹</h1>
+    <div class="subtitle">Tell me your name first ❤️</div>
+    <input type="text" id="nameInput" placeholder="Your name...">
+    <br>
+    <button onclick="showRose()">Continue</button>
+</div>
+
+<div class="card hidden" id="page2">
+    <div class="nameText" id="nameDisplay"></div>
+    <h1>Happy Rose Day Babe 🌹</h1>
+
+    <!-- Romantic Rose Picture -->
+    <img class="rose" src="1st.jpg">
+
+    <div class="message">
+        -_- I didn’t like your silence still... <br><br>
+        But this rose is for you. ❤️ <br><br>
+        Don’t ignore it this time.
+    </div>
+</div>
+
+<audio id="music" loop>
+<source src="2nd.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function showRose(){
+    let name=document.getElementById("nameInput").value.trim();
+
+    if(name===""){
+        alert("At least write your name ❤️");
+        return;
+    }
+
+    document.getElementById("music").play();
+
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+
+    document.getElementById("nameDisplay").innerHTML="For You, " + name;
+
+    // floating hearts
+    for(let i=0;i<25;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.animationDuration=(4+Math.random()*4)+"s";
+        heart.innerHTML="❤ "+name;
+        document.body.appendChild(heart);
+    }
+
+    alert("She typed: " + name);
+}
+</script>
+
+</body>
+</html>
